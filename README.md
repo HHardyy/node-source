@@ -1,5 +1,5 @@
 # node-source-code
-在node中require了一个js文件之后做了那些事呢
+在node中require了一个js文件之后做了哪些事呢
 ```node
 node-source-code
   - index.js
