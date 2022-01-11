@@ -39,9 +39,17 @@ class Module {
 
     throw new Error('module can not find')
   }
+  static _catch() { }
   static _load(filePath) {
     const _abspath = this._resolveFilename(filePath)
+
+    const _preCacheModule = this._catch[_abspath]
+    if (_preCacheModule) {
+      return _preCacheModule.exports
+    }
+
     let module = new this(_abspath)
+    this._catch[_abspath] = module
     module.load(_abspath)
     return module.exports
   }
@@ -63,3 +71,9 @@ class Module {
 // console.log(module1.content)
 const module1 = _require('./module1')
 console.log(module1)
+
+// 多次引入重复调用
+_require('./module1')
+_require('./module1')
+_require('./module1')
+_require('./module1')
