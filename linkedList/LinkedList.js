@@ -5,7 +5,7 @@ class LinkedList {
     this.head = null;
     this.size = 0;
   }
-  _add(index, element) {
+  _add(index=0, element) {
     if (arguments.length === 1) {
       element = index
       index = this.size
@@ -21,8 +21,15 @@ class LinkedList {
     }
     this.size ++
   }
-  _get() { }
-  _remove() { }
+  _remove(opt) {
+    if (opt === 0) {
+      let node = this.head
+      if (!node) return null
+      this.head = node.next
+      this.size--
+      return node.element
+    }
+  }
   getNode(index) {
     let current = this.head
     for (let i = 0; i < index; i++) {
@@ -42,18 +49,21 @@ class LinkedList {
     this.head = rever(this.head)
     return this.head
   }
+  _reverseListTemp() {
+    let head = this.head
+    if (head === null || head.next === null) return head
+    
+    let newHead = null
+
+    while (head !== null) {
+      let temp = this.head
+      head.next = newHead
+      newHead = head
+      head = temp
+    } 
+    this.head = newHead
+    return this.head
+  }
 }
 
-let ll = new LinkedList()
-
-// ll._add(0, 1)
-// ll._add(0, 2)
-// ll._add(3)
-
-// console.dir(ll, { depth: 1000 })
-
-ll._add(1)
-ll._add(2)
-ll._add(3)
-
-console.dir(ll._reverLinkList())
+module.exports = LinkedList
