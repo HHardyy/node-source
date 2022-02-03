@@ -62,6 +62,20 @@ class ReadStream extends EventEmitter {
     this.flowing = true
     this.read()
   }
+  pipe(dest) {
+    this.on('data', (data) => {
+      let flag = dest.write(data)
+      if (!flag) {
+        this.pause()
+      }
+    })
+    dest.on('drain', () => {
+      this.resume()
+    })
+    // this.on('end', () => {
+    //   dest.end()
+    // })
+  }
 }
 
 module.exports = ReadStream
