@@ -1,7 +1,7 @@
-# node-source-code
+# node-source
 在node中require了一个js文件之后做了哪些事呢
 ```node
-node-source-code
+node-source
   - index.js
   - module1.js
 ```
